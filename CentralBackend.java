@@ -22,7 +22,7 @@ public class CentralBackend {
     static EligibilityRule capacityRule = new CapacityRule();
 
     static boolean isManager() {
-        return "admin".equals(ClubPilotApp.currentUser) || "lead1".equals(ClubPilotApp.currentUser);
+        return ClubPilotApp.isManager();
     }
 
     public static void startEvents() {
