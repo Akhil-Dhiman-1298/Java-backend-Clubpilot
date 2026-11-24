@@ -30,9 +30,10 @@ public class ClubPilotApp{
             System.out.println("3) My Profile");
 
             if(isAdmin()){
-                System.out.println("4) Members");
-                System.out.println("5) Logout");
-                System.out.println("6) Exit");
+                System.out.println("4) Admin Panel");
+                System.out.println("5) Members");
+                System.out.println("6) Logout");
+                System.out.println("7) Exit");
             }
             else{
                 System.out.println("4) Logout");
@@ -52,16 +53,19 @@ public class ClubPilotApp{
                 ProfileMenu.show(sc);
             }
             else if(isAdmin() && choice.equals("4")){
+                AdminPanel.show(sc);
+            }
+            else if(isAdmin() && choice.equals("5")){
                 MembersMenu.show(sc);
             }
-            else if((isAdmin() && choice.equals("5")) || (!isAdmin() && choice.equals("4"))){
+            else if((isAdmin() && choice.equals("6")) || (!isAdmin() && choice.equals("4"))){
                 currentUser=null;
                 System.out.println("Logged out.\n");
                 if(!login()){
                     return;
                 }
             }
-            else if((isAdmin() && choice.equals("6")) || (!isAdmin() && choice.equals("5"))){
+            else if((isAdmin() && choice.equals("7")) || (!isAdmin() && choice.equals("5"))){
                 System.out.println("Bye!");
                 return;
             }
@@ -122,7 +126,7 @@ public class ClubPilotApp{
 
                 System.out.print("Enter email: ");
                 String newEmail=sc.nextLine().trim().toLowerCase();
-                
+
                 if(newEmail.isEmpty() || !newEmail.contains("@") || !newEmail.contains(".")){
                     System.out.println("Invalid email. Registration cancelled.");
                     continue;
@@ -132,7 +136,7 @@ public class ClubPilotApp{
                 displayNames.put(newUser, newUser);
                 emails.put(newUser, newEmail);
                 roles.put(newUser, "member");
-                
+
                 DatabaseManager.saveUser(newUser, newPass, newUser, newEmail, "member");
                 System.out.println("Account created successfully! You can now login.");
                 continue;
